@@ -1,0 +1,60 @@
+@import 'variables.scss';
+
+@keyframes blink {
+	0% {opacity: 0};
+	25% {opacity: 1};
+	75% {opacity: 1};
+	100% {opacity: 0};
+}
+
+.error {
+	font-weight: 700;
+	opacity: 1;
+	color: $red;
+}
+
+.new-tweet {
+	display: none;
+	$accent: $gold;
+	margin-bottom: 4em;
+	form {
+		margin: 0 50px 10px 50px;
+		textarea {
+			padding: 15px;
+			height: 100px;
+			width: 100%;
+			margin: 5px auto 15px auto;
+			border: none;
+			border-radius: 5px;
+			background: $accent;
+			font-weight: 700;
+			&::placeholder {
+				opacity: 1;
+				animation: 1.4s ease infinite blink;
+				color: $black;
+				font-weight: 400;
+			}
+		}
+		input {
+			background: none;
+			color: $black;
+			border: 2px solid $accent;
+			padding: 4px 10px 5px 10px;
+			&:hover {
+				cursor: pointer;
+				background: $accent;
+				color: $black;
+			}
+		}
+		.counter {
+			float: right;
+			padding: 1px 2px 2px 2px;
+			background: none;
+			margin-top: 5px;
+			&.invalidLength {
+				background: $red;
+				color: white;
+			}
+		}
+	}
+}

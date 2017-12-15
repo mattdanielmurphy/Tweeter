@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta Information -->
+    <title>Tweeter - Home Page</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css"/>
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/styles/layout.css"/>
+    <link rel="stylesheet" href="/styles/nav.css"/>
+    <link rel="stylesheet" href="/styles/new-tweet.css"/>
+
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+    <script type="text/javascript" src="/scripts/timeago.min.js"></script>
+
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Top nav bar (fixed) -->
+    <nav id="nav-bar">
+      <img src="/images/bird.svg" height="48px">
+      <span class="header">Tweeter</span>
+      <a href="#" id="composeTweet"><span>Compose</span></a>
+    </nav>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2>
+        <form method='POST' action='tweets'>
+          <span class='error'></span>
+          <textarea name="text" placeholder="What are you humming about?"></textarea>
+          <input type="submit" value="Tweet">
+          <span class="counter">140</span>
+        </form>
+      </section>
+      <section id="tweets-container">
+        <h2>Recent Tweets</h2>
+      </section>
+    </main>
+
+    <footer id='footer'>Bird icon by Jeannette Stutzman from the Noun Project</footer>
+  </body>
+</html>

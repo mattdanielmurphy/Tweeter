@@ -1,0 +1,120 @@
+/*
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * https://css-tricks.com/international-box-sizing-awareness-day/
+ * Do not modify these two selectors, please
+ */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*
+ * Global layout stuff
+*/
+
+body {
+  margin: 0;
+}
+
+/*
+ * Additional CSS can be defined below or in other CSS files, as per instructions
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Lora:400,400i,700');
+@import 'variables.scss';
+
+body {
+  font-family: 'Lora', serif;
+  padding-top: 31px;
+  background: $lightgrey;
+}
+
+.container {
+  background: $white;
+  color: invert($white);
+  padding: 50px 50px;
+  width: 650px;
+  margin: 40px auto;
+  h2 {
+    margin: 0 auto 20px auto;
+  }
+}
+
+#tweets-container {
+  .tweet {
+    $accent: $purple;
+    margin: 20px 25px 40px 25px;
+    background: $accent;
+    -webkit-box-shadow: 5px 7px 30px -2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 5px 7px 30px -2px rgba(0,0,0,0.2);
+    box-shadow: 5px 7px 30px -2px rgba(0,0,0,0.2);
+    &:hover {
+      header {
+        background: $gold;
+      }
+      footer .buttons a {
+        color: $gold;
+      }
+    }
+    header {
+      padding: .5em 0;
+      position: relative;
+      background: $white;
+      color: $black;
+      border: 1px solid $accent;
+      border-bottom: none;
+      transition: .2s ease;
+      h3 {
+        position: absolute;
+        top: 50%;
+        display: inline-block;
+        transform: translateY(-50%);
+        font-size: 1.2em;
+        margin: 0;
+      }
+      img {
+        padding: 5px .5em 0 1em;
+        height: 37px;
+      }
+      .handle {
+        float: right;
+        padding: .5em 1em 0 0;
+        font-style: italic;
+      }
+    }
+    p {
+      padding: .5em 1em;
+      margin: .75em 0;
+      font-size: 1.1em;
+      color: $white;
+    }
+    footer {
+      background: $accent / 1.1;
+      color: $white;
+      font-style: italic;
+      padding: .5em .5em .7em 1em;
+      font-size: .75em;
+      .buttons {
+        float: right;
+        a {
+          transition: .3s ease;
+          float: left;
+          color: $accent / 1.1;
+          padding: 0 .2em;
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+#footer {
+  text-align: center;
+  padding: 2em;
+  background: $black;
+  color: $white;
+}

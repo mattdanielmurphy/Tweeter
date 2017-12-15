@@ -1,0 +1,92 @@
+/*
+ * Client-side JS logic goes here
+ * jQuery is already loaded
+ * Reminder: Use (and do all your DOM work in) jQuery's document ready function
+*/
+
+$(document).ready( function() {
+
+	$('#composeTweet').on('click', () => {
+		$('.new-tweet').slideToggle();
+		$('.new-tweet textarea').focus();
+	});
+
+	function loadTweets() {
+		$.ajax({
+			url: '/tweets',
+			method: 'GET',
+			success: function(tweets) {
+				renderTweets(tweets);
+			}
+		})
+	}
+
+	loadTweets();
+
+	var form = $('.new-tweet form');
+	// fetches tweets from /tweets
+
+	form.on('submit', function(event) {
+		event.preventDefault();
+		let potentialTweet = $('.new-tweet form textarea').val().replace(/^\s+|\s+$/g, '');
+		// ^ remove leading and trailing whitespace ^
+
+		if (potentialTweet.length > 140) {
+			$('.new-tweet').prepend(`<span class="error">Error: Your tweet is too long.</span>`);
+		} else if (potentialTweet === '') {
+			$('.new-tweet').prepend(`Error: Your tweet is empty.`);
+		} else {
+			$.ajax({
+				type: 'POST',
+				url: form.attr('action'),
+				data: form.serialize(),
+				success: function() {
+					loadTweets();
+					$('.new-tweet textarea').val('');
+				}
+			});
+		}
+	});
+
+	function renderTweets(array) {
+		$('#tweets-container').not(':first').remove();
+		for (const i in array) {
+			// Add tweet to container
+			$('#tweets-container').prepend(
+				createTweetElement(array[i])
+			);
+		}
+		$('#tweets-container').prepend(
+			$('#tweets-container h2')
+		);
+		timeago().render($('.time'));
+	}
+
+	function escape(str) {
+		let span = document.createElement('span');
+		span.appendChild(document.createTextNode(str));
+		return span.innerHTML;
+	}
+
+	function createTweetElement(tweet) {
+		var $tweet = $(`
+			<article class="tweet">
+				<header>
+					<img src='images/bird.svg'>
+					<h3>${escape(tweet.user.name)}</h3>
+					<span class='handle'>${escape(tweet.user.handle)}</span>
+				</header>
+				<p>${escape(tweet.content.text)}</p>
+				<footer>
+					<span datetime='${escape(tweet.created_at)}' class='time'></span>
+					<span class='buttons'>
+						<a href="/"><i class="fas fa-flag"></i></a>
+						<a href="/"><i class="fas fa-retweet"></i></a>
+						<a href="/"><i class="fas fa-heart"></i></a>
+					</span>
+				</footer>
+			</article>
+		`)
+		return $tweet;
+	}
+});
