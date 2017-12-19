@@ -6,8 +6,8 @@ Built with HTML, CSS, JS, jQuery, AJAX, NodeExpress and MongoDB.
 
 ## Screenshots
 
-!["Screnshot of text being inputted before submitted."]()
-!["Screnshot of text that was just submitted."]()
+!["Screnshot of text being inputted before submitted."](https://raw.githubusercontent.com/mattdanielmurphy/Tweeter/master/docs/main%20pre-submit.png)
+!["Screnshot of text that was just submitted."](https://raw.githubusercontent.com/mattdanielmurphy/Tweeter/master/docs/main%20post-submit.png)
 
 ## Dependencies
 
