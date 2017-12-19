@@ -5,7 +5,6 @@
 */
 
 $(document).ready( function() {
-
 	$('#composeTweet').on('click', () => {
 		$('.new-tweet').slideToggle();
 		$('.new-tweet textarea').focus();
@@ -24,41 +23,48 @@ $(document).ready( function() {
 	loadTweets();
 
 	var form = $('.new-tweet form');
+
 	// fetches tweets from /tweets
-
 	form.on('submit', function(event) {
+		// prevent redirect:
 		event.preventDefault();
-		let potentialTweet = $('.new-tweet form textarea').val().replace(/^\s+|\s+$/g, '');
-		// ^ remove leading and trailing whitespace ^
 
+		// remove leading and trailing whitespace:
+		let potentialTweet = $('.new-tweet form textarea').val().replace(/^\s+|\s+$/g, '');
+
+		// check for invalid tweet:
 		if (potentialTweet.length > 140) {
 			$('.new-tweet').prepend(`<span class="error">Error: Your tweet is too long.</span>`);
 		} else if (potentialTweet === '') {
 			$('.new-tweet').prepend(`Error: Your tweet is empty.`);
 		} else {
+			// if valid, POST:
 			$.ajax({
 				type: 'POST',
 				url: form.attr('action'),
 				data: form.serialize(),
 				success: function() {
-					loadTweets();
 					$('.new-tweet textarea').val('');
+					loadTweets();
 				}
 			});
 		}
 	});
 
 	function renderTweets(array) {
-		$('#tweets-container').not(':first').remove();
+		let tweets = $('#tweets-container');
+		tweets.empty();
+		// loop through and create each tweet
 		for (const i in array) {
-			// Add tweet to container
-			$('#tweets-container').prepend(
+			// Add each tweet to container
+			tweets.prepend(
 				createTweetElement(array[i])
 			);
 		}
-		$('#tweets-container').prepend(
-			$('#tweets-container h2')
-		);
+
+		// put h2 back at the top
+		tweets.prepend( $('#tweets-container h2') );
+		// render all times shown on the page:
 		timeago().render($('.time'));
 	}
 

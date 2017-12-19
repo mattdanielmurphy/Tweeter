@@ -4,7 +4,6 @@ const userHelper    = require("../lib/util/user-helper")
 
 const express       = require('express');
 const tweetsRoutes  = express.Router();
-const alert         = require('alert-node');
 
 module.exports = function(DataHelpers) {
 
@@ -20,7 +19,7 @@ module.exports = function(DataHelpers) {
 
   tweetsRoutes.post("/", function(req, res) {
     if (!req.body.text) {
-      alert('Error!');
+      $('.new-tweets').append('Error: not sent');
       return;
     }
 
